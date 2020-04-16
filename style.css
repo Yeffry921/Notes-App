@@ -1,0 +1,38 @@
+.notes-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.note-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.btn-items {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 6rem;
+}
+
+.btn-items>button {
+    margin: 10px;
+}
+
+.isEditable {
+    padding: .25em 0em;
+    margin: 1em 0;
+    transition: padding .3s ease-in-out;
+    outline: 2px solid #eee;
+
+}
+
+.isEditable:hover,
+.isEditable:focus {
+    padding: .25em;
+}
+
+.isEditable:focus {
+    background: #efefef;
+    outline: 2px solid blue;
+}
