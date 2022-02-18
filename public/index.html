@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Todo List</title>
+</head>
+<body>
+  <section>
+    <div class="container">
+      <!-- Title -->
+      <h1 class="task__heading-title">Notes App</h1>
+
+      <!-- Form Input -->
+      <form class="task__form">
+        <div>
+          <div>
+            <input type="text" id="taskInput" class="form-control" placeholder="Enter task here"/>
+            <label class="form-label" for="taskInput">Enter a task here</label>
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-warning">Get tasks</button>
+        </div>
+      </form>
+
+      <!-- Form output -->
+
+      <table>
+        <thead>
+          <tr>
+            <th class="column">No.</th>
+            <th class="column">Note Item</th>
+            <th class="column">Status</th>
+            <th class="column">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Buy groceries for next week</td>
+            <td>In progress</td>
+            <td>
+              <button>Delete</button>
+              <button>Finished</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</body>
+</html>
