@@ -1,0 +1,25 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yeffry921/Notes-App.git"
+  },
+  "keywords": [],
+  "author": "ANTONI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Yeffry921/Notes-App/issues"
+  },
+  "homepage": "https://github.com/Yeffry921/Notes-App#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15"
+  }
+}
