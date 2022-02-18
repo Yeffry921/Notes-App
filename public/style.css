@@ -1,0 +1,44 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 2rem auto;
+}
+
+.task__heading-title {
+  text-align: center;
+  padding: 1rem;
+  margin: .5rem 0;
+}
+
+.task__form {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  margin-bottom: 1.5rem;
+}
