@@ -14,7 +14,7 @@ const createNote = (noteData) => {
     id: uid()
   }
 
-  notes.push(note)
+  notes = notes.concat(note)
 }
 
 const getNotes = () => {
@@ -58,12 +58,35 @@ taskForm.addEventListener('submit', (e) => {
   displayNotes(notes)
 })
 
-// Listen for Note deletion
+// Listen for Button actions
 taskData.addEventListener('click', (e) => {
+  // DELETE TASK
   if(e.target.classList.contains('task__delete')) {
     const id = e.target.closest('tr').getAttribute('data-id')
     deleteNotes(id)
+    displayNotes(notes)
   }
+
+  // CHANGE TASK STATUS
+  if(e.target.classList.contains('task__status')) {
+    const id = e.target.closest('tr').getAttribute('data-id')
+
+    const newNotes = notes.map((note) => {
+      if(note.id === id) {
+        const type = note.status === 'In progress' ? 'Completed' : 'In progress'
+        return {
+          ...note, 
+          status: type
+        }
+      }
+      return note
+    })
+
+    notes = newNotes
+    console.log(notes)
+    displayNotes(notes)
+  }
+  
 })
 
 const init = () => {
