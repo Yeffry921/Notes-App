@@ -10,7 +10,7 @@ let notes = [];
 const createNote = (noteData) => {
   const note = {
     content: noteData,
-    status: 'In progress', 
+    completed: false, 
     id: uid()
   }
 
@@ -27,10 +27,11 @@ const deleteNotes = (id) => {
 
 const displayNotes = (notes) => {
   const render = notes.map((note) => {
+    const status = note.completed === false ? 'In Progress' : 'Completed'
     return (
       `<tr data-id=${note.id}>
         <td>${note.content}</td>
-        <td>${note.status}</td>
+        <td>${status}</td>
         <td>
           <button class="task__delete">Delete</button>
           <button class="task__status">Finished</button>
@@ -73,17 +74,15 @@ taskData.addEventListener('click', (e) => {
 
     const newNotes = notes.map((note) => {
       if(note.id === id) {
-        const type = note.status === 'In progress' ? 'Completed' : 'In progress'
         return {
           ...note, 
-          status: type
+          completed: !note.completed
         }
       }
       return note
     })
 
     notes = newNotes
-    console.log(notes)
     displayNotes(notes)
   }
   
