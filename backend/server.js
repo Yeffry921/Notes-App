@@ -5,6 +5,8 @@ const PORT = process.env.PORT || 3001
 const connectDB = require('./config/database')
 
 app.use(express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use('/api/notes', require('./routes/noteRoutes'))
 
 connectDB()
