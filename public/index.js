@@ -7,14 +7,24 @@ const taskDelete = document.querySelector('.task__delete')
 let notes = [];
 
 // Create Note
-const createNote = (noteData) => {
+const createNote = async (noteData) => {
   const note = {
     content: noteData,
     completed: false, 
     id: uid()
   }
+  
+  const setNote = await fetch('http://localhost:3001/api/notes', {
+    method: 'POST',
+    headers: { "Content-type": "application/json;charset=UTF-8" },
+    body: JSON.stringify(note)
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    return notes = notes.concat(data)
+  })
 
-  notes = notes.concat(note)
+  return setNote
 }
 
 const getNotes = () => {
@@ -51,12 +61,12 @@ const uid = () => {
        + Date.now().toString(16).slice(4);
 };
 // Listen for Note creation 
-taskForm.addEventListener('submit', (e) => {
+taskForm.addEventListener('submit', async (e) => {
   e.preventDefault()
 
-  createNote(taskInput.value)
+  const newNotes = await createNote(taskInput.value)
 
-  displayNotes(notes)
+  displayNotes(newNotes)
 })
 
 // Listen for Button actions
