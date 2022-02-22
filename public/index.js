@@ -13,7 +13,7 @@ const createNote = async (noteData) => {
     completed: false, 
     id: uid()
   }
-  
+
   const setNote = await fetch('http://localhost:3001/api/notes', {
     method: 'POST',
     headers: { "Content-type": "application/json;charset=UTF-8" },
@@ -31,15 +31,25 @@ const getNotes = () => {
   return notes
 }
 
-const deleteNotes = (id) => {
-  notes = notes.filter((note) => note.id !== id)
+const deleteNotes = async (id) => {
+  console.log(id)
+
+  const newNotes = await fetch(`http://localhost:3001/api/notes/${id}`, {
+    method: 'DELETE'
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    return notes = notes.filter((note) => note._id !== id)
+  })
+
+  return newNotes
 }
 
 const displayNotes = (notes) => {
   const render = notes.map((note) => {
     const status = note.completed === false ? 'In Progress' : 'Completed'
     return (
-      `<tr data-id=${note.id}>
+      `<tr data-id=${note._id}>
         <td>${note.content}</td>
         <td>${status}</td>
         <td>
@@ -70,12 +80,12 @@ taskForm.addEventListener('submit', async (e) => {
 })
 
 // Listen for Button actions
-taskData.addEventListener('click', (e) => {
+taskData.addEventListener('click', async (e) => {
   // DELETE TASK
   if(e.target.classList.contains('task__delete')) {
     const id = e.target.closest('tr').getAttribute('data-id')
-    deleteNotes(id)
-    displayNotes(notes)
+    const newNotes = await deleteNotes(id)
+    displayNotes(newNotes)
   }
 
   // CHANGE TASK STATUS
