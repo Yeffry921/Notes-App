@@ -27,12 +27,12 @@ const createNote = async (noteData) => {
   return setNote
 }
 
-const getNotes = () => {
-  return notes
+const getNotes = async() => {
+  const notesResponse = await fetch('http://localhost:3001/api/notes')
+  return notesResponse.json()
 }
 
 const deleteNotes = async (id) => {
-  console.log(id)
 
   const newNotes = await fetch(`http://localhost:3001/api/notes/${id}`, {
     method: 'DELETE'
@@ -108,7 +108,9 @@ taskData.addEventListener('click', async (e) => {
   
 })
 
-const init = () => {
+const init = async () => {
+  notes = await getNotes()
+
   displayNotes(notes)
 }
 
