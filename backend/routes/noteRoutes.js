@@ -25,10 +25,10 @@ router.get('/:id', (req, res) => {
 })
 
 // CREATE A RESOURCE
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
   const body = req.body
-
-  const note = Note.create({
+  
+  const note = await Note.create({
     content: body.content,
     completed: body.completed
   })
