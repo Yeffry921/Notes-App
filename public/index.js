@@ -45,6 +45,25 @@ const deleteNotes = async (id) => {
   return newNotes
 }
 
+const updateNoteStatus = async (id) => {
+  const note = notes.find((note) => note._id === id)
+  const changedNote = { 
+    ...note,
+    completed: !note.completed
+   }
+
+  const updatedNotes = await fetch(`http://localhost:3001/api/notes/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-type': 'application/json' },
+    body: JSON.stringify(changedNote)
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    return notes = notes.map((note) => note._id !== id ? note: data)
+  })
+  return updatedNotes
+}
+
 const displayNotes = (notes) => {
   const render = notes.map((note) => {
     const status = note.completed === false ? 'In Progress' : 'Completed'
@@ -91,19 +110,9 @@ taskData.addEventListener('click', async (e) => {
   // CHANGE TASK STATUS
   if(e.target.classList.contains('task__status')) {
     const id = e.target.closest('tr').getAttribute('data-id')
-
-    const newNotes = notes.map((note) => {
-      if(note.id === id) {
-        return {
-          ...note, 
-          completed: !note.completed
-        }
-      }
-      return note
-    })
-
-    notes = newNotes
-    displayNotes(notes)
+    const updatedNotes = await updateNoteStatus(id)
+    
+    displayNotes(updatedNotes)
   }
   
 })
