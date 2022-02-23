@@ -39,7 +39,14 @@ router.post('/', async (req, res) => {
 // UPDATE A RESOURCE
 router.put('/:id', (req, res) => {
  
-  Note.findByIdAndUpdate(req.params.id, { completed: !req.body.completed }, { new: true })
+  const body = req.body
+
+  const changedNote = {
+    content: body.content,
+    completed: body.completed
+  }
+
+  Note.findByIdAndUpdate(req.params.id, changedNote, { new: true })
     .then((result) => {
       res.status(200).json(result)
     })
