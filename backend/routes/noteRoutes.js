@@ -1,69 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const Note = require('../models/noteModel')
-
+const { getAllNotes, getNote, setNote, updateNote, deleteNote } = require('../controllers/noteController')
 // GET ALL RESOURCES
-router.get('/', (req, res) => {
-  Note.find({})
-    .then((result) => {
-      res.status(200).json(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+router.get('/', getAllNotes)
 
 // GET A SINGLE RESOURCE
-router.get('/:id', (req, res) => {
-  Note.findById(req.params.id)
-    .then((result) => {
-      res.status(200).json(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+router.get('/:id', getNote)
 
 // CREATE A RESOURCE
-router.post('/', async (req, res) => {
-  const body = req.body
-  
-  const note = await Note.create({
-    content: body.content,
-    completed: body.completed
-  })
-
-  res.status(200).json(note)
-})
+router.post('/', setNote)
 
 // UPDATE A RESOURCE
-router.put('/:id', (req, res) => {
- 
-  const body = req.body
-
-  const changedNote = {
-    content: body.content,
-    completed: body.completed
-  }
-
-  Note.findByIdAndUpdate(req.params.id, changedNote, { new: true })
-    .then((result) => {
-      res.status(200).json(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+router.put('/:id', updateNote)
 
 // DELETE A RESOURCE
-router.delete('/:id', (req, res) => {
-  Note.findByIdAndDelete(req.params.id)
-    .then((result) => {
-      res.status(200).json(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-})
+router.delete('/:id', deleteNote)
 
 module.exports = router
