@@ -9,12 +9,17 @@ const getAllNotes = async (req, res) => {
   }
 }
 
-const getNote = async (req, res) => {
+const getNote = async (req, res, next) => {
     try {
       const result = await Note.findById(req.params.id)
-      res.status(200).json(result)
+      if(result) {
+        res.status(200).json(result)
+      } else {
+        res.status(404).end()
+      }
     } catch (error) {
-      console.log(error)
+      next()
+     
     }
 }
 
